@@ -1,5 +1,8 @@
 {
-  "name": "stdsharp",
-  "version": "0.1.0",
-  "dependencies": ["fmt", "range-v3", "ctre", "catch2"]
+  "name": "your-project",
+  "version": "0.0.1",
+  "dependencies": [
+    "stdsharp",
+    "catch2"
+  ]
 }

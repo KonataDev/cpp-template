@@ -11,19 +11,6 @@ verbose_message("Adding tests under ${CMAKE_PROJECT_NAME}...")
 set(
     src
     src/tests.cpp
-    src/pattern_match_test.cpp
-    src/concurrent_object_test.cpp
-    src/algorithm/algorithm_test.cpp
-    src/utility/utility_test.cpp
-    src/containers/containers_test.cpp
-    src/containers/actions_test.cpp
-    src/type_traits/value_sequence_test.cpp
-    src/type_traits/type_sequence_test.cpp
-    src/type_traits/member_test.cpp
-    src/tuple/tuple_test.cpp
-    src/functional/pipeable_test.cpp
-    src/functional/symmetric_operations_test.cpp
-    src/filesystem/filesystem_test.cpp
 )
 
 config_lib(${PROJECT_NAME}Lib INTERFACE)
@@ -37,7 +24,7 @@ target_compile_options(
 
 find_package(Catch2 CONFIG REQUIRED)
 include(Catch)
-target_link_libraries(${PROJECT_NAME} PRIVATE stdsharp Catch2::Catch2WithMain ${PROJECT_NAME}Lib)
+target_link_libraries(${PROJECT_NAME} PRIVATE Catch2::Catch2WithMain ${PROJECT_NAME}Lib)
 
 #
 # Configure clang-tidy
@@ -59,11 +46,4 @@ option(ENABLE_CODE_COVERAGE "Enable code coverage" OFF)
 
 if(${ENABLE_CODE_COVERAGE})
     target_coverage(${PROJECT_NAME} FORMAT lcov)
-endif()
-
-find_program(iwyu "include-what-you-use")
-
-if(EXISTS "${iwyu}")
-    message(STATUS "found iwyu at ${iwyu}")
-    set_target_properties(${PROJECT_NAME} PROPERTIES CXX_INCLUDE_WHAT_YOU_USE "${iwyu};-w;-Xiwyu")
 endif()

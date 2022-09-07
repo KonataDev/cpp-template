@@ -1,20 +1,17 @@
 cmake_minimum_required(VERSION 3.22)
-
-include(cmake/Utils.cmake)
-
 #
 # Project details
 #
-project(stdsharp VERSION 0.3.0 LANGUAGES CXX)
-
-config_lib(${PROJECT_NAME} INTERFACE STD 23)
+project(YOUR_PROJECT_NAME VERSION 0.0.1 LANGUAGES CXX)
 
 #
 # Model project dependencies
 #
-find_package(fmt CONFIG REQUIRED)
-find_package(range-v3 CONFIG REQUIRED)
-find_package(ctre CONFIG REQUIRED)
+find_package(stdsharp CONFIG REQUIRED)
+
+include(stdsharp/Utils)
+
+config_lib(${PROJECT_NAME} INTERFACE STD 23)
 
 target_compile_options(
     ${PROJECT_NAME}
@@ -23,7 +20,7 @@ target_compile_options(
 
 target_link_libraries(
     ${PROJECT_NAME}
-    INTERFACE fmt::fmt range-v3::range-v3 ctre::ctre
+    INTERFACE stdsharp::stdsharp
 )
 
 verbose_message("Successfully added all dependencies and linked against them.")
@@ -32,12 +29,7 @@ target_install(
     ${PROJECT_NAME}
     NAMESPACE ${PROJECT_NAME}
     COMPATIBILITY SameMajorVersion
-    DEPENDENCIES fmt;ctre;range-v3
-)
-
-install(
-    FILES cmake/Utils.cmake
-    DESTINATION ${${PROJECT_NAME}_INSTALL_CMAKEDIR}/stdsharp
+    DEPENDENCIES stdsharp
 )
 
 get_directory_property(is_subproject PARENT_DIRECTORY)
@@ -50,14 +42,14 @@ endif()
 
 include(CMakeDependentOption)
 
-CMAKE_DEPENDENT_OPTION(STDSHARP_BUILD_TEST "Whether to build test" ON "${is_standalone}" OFF)
-CMAKE_DEPENDENT_OPTION(STDSHARP_INCLUDE_AS_SYSTEM "Whether to include stdsharp headers as system headers" OFF "${is_standalone}" ON)
+CMAKE_DEPENDENT_OPTION(${PROJECT_NAME}_BUILD_TEST "Whether to build test" ON "${is_standalone}" OFF)
+CMAKE_DEPENDENT_OPTION(${PROJECT_NAME}_INCLUDE_AS_SYSTEM "Whether to include headers as system headers" OFF "${is_standalone}" ON)
 
-if(STDSHARP_INCLUDE_AS_SYSTEM)
+if(${PROJECT_NAME}_INCLUDE_AS_SYSTEM)
     target_include_as_system(${PROJECT_NAME} INTERFACE)
 endif()
 
-if(STDSHARP_BUILD_TEST)
+if(${PROJECT_NAME}_BUILD_TEST)
     include(CTest)
     add_subdirectory(tests)
 endif()
