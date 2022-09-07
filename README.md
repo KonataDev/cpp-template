@@ -1,11 +1,6 @@
-# stdsharp
+# cpp-template
 
-[![](https://github.com/BlurringShadow/stdsharp/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/BlurringShadow/stdsharp/actions/workflows/build-and-test.yml)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f08b08ddd5e146c69b39ac5001f06c6a)](https://www.codacy.com/gh/BlurringShadow/stdsharp/dashboard?utm_source=github.com&utm_medium=referral&utm_content=BlurringShadow/stdsharp&utm_campaign=Badge_Grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f08b08ddd5e146c69b39ac5001f06c6a)](https://www.codacy.com/gh/BlurringShadow/stdsharp/dashboard?utm_source=github.com&utm_medium=referral&utm_content=BlurringShadow/stdsharp&utm_campaign=Badge_Coverage)
-[![wakatime](https://wakatime.com/badge/github/BlurringShadow/stdsharp.svg)](https://wakatime.com/badge/github/BlurringShadow/stdsharp)
-
-An optimized and supplement library of fundamental features for standard c++. Headers are arranged in accordance with the standard library structure.
+(Description).
 
 <br/>
 
@@ -24,8 +19,7 @@ An optimized and supplement library of fundamental features for standard c++. He
 
 ### Installing
 
-- Clone the project and use cmake to install, or
-- Add [my vcpkg registry](https://github.com/BlurringShadow/vcpkg-registry) to your vcpkg-configuration.json.
+(Install guideline)
 
 <br/>
 
