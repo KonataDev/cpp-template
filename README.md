@@ -1,14 +1,12 @@
 # cpp-template
 
-(Description).
-
 <br/>
 
 ## Getting Started
 
 ### Prerequisites
 
-- **[CMake v3.22+](https://github.com/BlurringShadow/stdsharp/blob/main/CMakeLists.txt#L1)** - required for building
+- **[CMake v3.24+](https://github.com/BlurringShadow/stdsharp/blob/main/CMakeLists.txt#L1)** - required for building
 
 - **C++ Compiler** - needs to support at least the **C++20** and **partial C++23** standard, i.e. _MSVC_, _GCC_, _Clang_. You could checkout [github workflow file](.github/workflows/build.yml) for suitable compilers.
 

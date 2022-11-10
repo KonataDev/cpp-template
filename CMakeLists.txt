@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.24)
 #
 # Project details
 #
@@ -14,9 +14,11 @@ include(stdsharp/Utils)
 config_lib(${PROJECT_NAME} INTERFACE STD 23)
 
 target_compile_options(
-    ${PROJECT_NAME}
-    INTERFACE $<$<CXX_COMPILER_ID:MSVC>: /external:anglebrackets>
-)
+  ${PROJECT_NAME} INTERFACE $<$<CXX_COMPILER_ID:MSVC>: /external:anglebrackets>
+                            $<$<CXX_COMPILER_ID:Clang>: -fexperimental-library>)
+
+target_compile_definitions(${PROJECT_NAME} INTERFACE $<$<CXX_COMPILER_ID:Clang>:
+                                                     _LIBCPP_ENABLE_NODISCARD>)
 
 target_link_libraries(
     ${PROJECT_NAME}
@@ -35,15 +37,19 @@ target_install(
 get_directory_property(is_subproject PARENT_DIRECTORY)
 
 if(NOT is_subproject)
-    set(is_standalone YES)
+  set(is_standalone YES)
 else()
-    set(is_standalone NO)
+  set(is_standalone NO)
 endif()
 
 include(CMakeDependentOption)
 
-CMAKE_DEPENDENT_OPTION(${PROJECT_NAME}_BUILD_TEST "Whether to build test" ON "${is_standalone}" OFF)
-CMAKE_DEPENDENT_OPTION(${PROJECT_NAME}_INCLUDE_AS_SYSTEM "Whether to include headers as system headers" OFF "${is_standalone}" ON)
+cmake_dependent_option(STDSHARP_BUILD_TEST "Whether to build test" ON
+                       "${is_standalone}" OFF)
+cmake_dependent_option(
+  STDSHARP_INCLUDE_AS_SYSTEM
+  "Whether to include stdsharp headers as system headers" OFF
+  "${is_standalone}" ON)
 
 if(${PROJECT_NAME}_INCLUDE_AS_SYSTEM)
     target_include_as_system(${PROJECT_NAME} INTERFACE)
