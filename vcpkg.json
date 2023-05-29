@@ -1,8 +1,23 @@
 {
-  "name": "your-project",
-  "version": "0.0.1",
+  "name": "cpp-template",
+  "version": "0.1.0",
   "dependencies": [
+    "ms-gsl",
     "stdsharp",
     "catch2"
-  ]
+  ],
+  "overrides": [],
+  "vcpkg-configuration": {
+    "registries": [
+      {
+        "kind": "git",
+        "repository": "https://github.com/BlurringShadow/vcpkg-registry.git",
+        "baseline": "bbd6493cf5c0d66e9a4b1dfa214cb3d075479fbd",
+        "packages": [
+          "stdsharp"
+        ]
+      }
+    ]
+  },
+  "builtin-baseline": "0ccb3d11406922bef1dcc29002f68f633a321f19"
 }

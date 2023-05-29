@@ -11,15 +11,13 @@ include(Catch)
 #
 # Set the sources for the unit tests and add the executable(s)
 #
-set(
-    src
-    src/tests.cpp
-)
+set(src src/test.cpp)
 
 config_lib(${PROJECT_NAME}Lib INTERFACE)
 
-target_link_libraries(${PROJECT_NAME}Lib INTERFACE stdsharp::stdsharp
-                                                   Catch2::Catch2WithMain)
+target_link_libraries(
+  ${PROJECT_NAME}Lib INTERFACE ${CMAKE_PROJECT_NAME} stdsharp::stdsharp
+                               Catch2::Catch2WithMain)
 
 config_exe(${PROJECT_NAME} EXE_SRC ${src})
 
@@ -60,7 +58,8 @@ if(CODE_COVERAGE_EXT)
     DEPENDS ${PROJECT_NAME}
     COMMAND ${CMAKE_COMMAND} -E rm -f ${PROFILE_FILE}
     COMMAND ${CMAKE_COMMAND} -E env LLVM_PROFILE_FILE=${PROFILE_FILE}
-            $<TARGET_FILE:${PROJECT_NAME}> # Run first to generate profraw file
+            $<TARGET_FILE:${PROJECT_NAME}> || exit 0 # Run first to generate
+                                                     # profraw file
   )
 
   target_coverage(
