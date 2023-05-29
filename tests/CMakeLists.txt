@@ -18,12 +18,16 @@ set(
 
 config_lib(${PROJECT_NAME}Lib INTERFACE)
 
-target_link_libraries(${PROJECT_NAME}Lib INTERFACE stdsharp
+target_link_libraries(${PROJECT_NAME}Lib INTERFACE stdsharp::stdsharp
                                                    Catch2::Catch2WithMain)
 
 config_exe(${PROJECT_NAME} EXE_SRC ${src})
 
-target_compile_options(${PROJECT_NAME} PUBLIC $<$<CXX_COMPILER_ID:MSVC>:/W4>)
+target_compile_options(
+  ${PROJECT_NAME}
+  PUBLIC $<$<CXX_COMPILER_ID:MSVC>:/W4>
+         $<$<CXX_COMPILER_ID:Clang>:-ftemplate-backtrace-limit=0 -ftime-trace
+         -fdiagnostics-show-template-tree>)
 target_enable_clang_sanitizer(${PROJECT_NAME} PUBLIC SANITIZER address
                               undefined)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}Lib)

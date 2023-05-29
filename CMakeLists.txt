@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.24)
 #
 project(YOUR_PROJECT_NAME VERSION 0.0.1 LANGUAGES CXX)
 
+config_lib(${PROJECT_NAME} INTERFACE STD 23)
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
 #
 # Model project dependencies
 #
@@ -17,8 +20,8 @@ target_compile_options(
   ${PROJECT_NAME} INTERFACE $<$<CXX_COMPILER_ID:MSVC>: /external:anglebrackets>
                             $<$<CXX_COMPILER_ID:Clang>: -fexperimental-library>)
 
-target_compile_definitions(${PROJECT_NAME} INTERFACE $<$<CXX_COMPILER_ID:Clang>:
-                                                     _LIBCPP_ENABLE_NODISCARD>)
+target_link_options(${PROJECT_NAME} INTERFACE $<$<CXX_COMPILER_ID:Clang>:
+                    -lc++experimental>)
 
 target_link_libraries(
     ${PROJECT_NAME}

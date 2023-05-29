@@ -373,3 +373,5 @@ CMakeSettings.json
 build-preview/
 .idea/
 **/*.clangd
+*.profraw
+.VSCodeCounter/

@@ -148,6 +148,11 @@ function(target_install target)
     verbose_message("Use default version ${ARG_VER}")
   endif()
 
+  if(NOT DEFINED ARG_NAMESPACE)
+    set(ARG_NAMESPACE ${CMAKE_PROJECT_NAME})
+    verbose_message("Use default namespace ${ARG_NAMESPACE}")
+  endif()
+
   install(
     TARGETS ${target}
     EXPORT ${target}Targets
@@ -181,7 +186,7 @@ function(target_install target)
   install(
     EXPORT ${target}Targets
     DESTINATION "${${target}_INSTALL_CMAKEDIR}"
-    NAMESPACE ${ARG_NAMESPACE}
+    NAMESPACE ${ARG_NAMESPACE}::
     COMPONENT "${target}_Development")
 
   if(ARG_ARCH_INDEPENDENT)
@@ -242,13 +247,10 @@ function(target_enable_clang_tidy target)
         "${CLANG_TIDY};--enable-check-profile;--store-check-profile=${report_folder}"
     )
 
-    if(EXISTS ${report_folder})
-      add_custom_target(
-        ${target}ClangTidyClean ALL
-        COMMAND ${CMAKE_COMMAND} -E rm -r ${report_folder}/
-        USES_TERMINAL)
-      add_dependencies(${target} ${target}ClangTidyClean)
-    endif()
+    add_custom_target(
+      ${target}ClangTidyClean ALL
+      COMMAND ${CMAKE_COMMAND} -E rm -rf ${report_folder}/
+      USES_TERMINAL)
   else()
     message(STATUS "clang-tidy not found")
   endif()
