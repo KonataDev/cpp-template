@@ -50,13 +50,13 @@ jobs:
       #     project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
       #     coverage-reports: .build/Debug/tests/stdsharpTestsCoverage.lcov
 
-      - name: Codacy Analysis
-        uses: codacy/codacy-analysis-cli-action@master
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          upload: true
-          run-docker-tools: false
-          clang-tidy-output: ".build/Debug/cmake-build.log"
+      # - name: Codacy Analysis
+      #   uses: codacy/codacy-analysis-cli-action@master
+      #   with:
+      #     project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+      #     upload: true
+      #     run-docker-tools: false
+      #     clang-tidy-output: ".build/Debug/cmake-build.log"
 
   windows-job:
     name: Windows
