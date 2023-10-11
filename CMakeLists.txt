@@ -23,9 +23,6 @@ target_compile_options(
   ${PROJECT_NAME} INTERFACE $<$<CXX_COMPILER_ID:MSVC>: /external:anglebrackets>
                             $<$<CXX_COMPILER_ID:Clang>: -fexperimental-library>)
 
-target_link_options(${PROJECT_NAME} INTERFACE $<$<CXX_COMPILER_ID:Clang>:
-                    -lc++experimental>)
-
 target_link_libraries(${PROJECT_NAME} INTERFACE stdsharp::stdsharp)
 
 verbose_message("Successfully added all dependencies and linked against them.")
