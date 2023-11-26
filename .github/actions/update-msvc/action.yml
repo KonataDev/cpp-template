@@ -4,6 +4,6 @@ runs:
   using: composite
 
   steps:
-    - run: |
-        Start-Process -Wait -FilePath  "C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" -ArgumentList "update --passive --norestart --force --channelId VisualStudio.17.Release --installpath ""C:\Program Files\Microsoft Visual Studio\2022\Enterprise"""
+    - run: ./update-vs.ps1
+      working-directory: ${{ github.action_path }}
       shell: pwsh

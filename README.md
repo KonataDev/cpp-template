@@ -8,7 +8,7 @@
 
 - **[CMake v3.24+](https://github.com/BlurringShadow/stdsharp/blob/main/CMakeLists.txt#L1)** - required for building
 
-- **C++ Compiler** - needs to support at least the **C++20** and **partial C++23** standard, i.e. _MSVC_, _GCC_, _Clang_. You could checkout [github workflow file](.github/workflows/build.yml) for suitable compilers.
+- **C++ Compiler** - needs to support at least the **C++20** and **partial C++23/26** features, i.e. _MSVC_, _GCC_, _Clang_. You could checkout [github workflow file](.github/workflows/build.yml) for suitable compilers.
 
   - Note that if you're using clang as compiler, [ld.lld](https://lld.llvm.org/) is required. Using [libc++](https://libcxx.llvm.org/) as compiler STL is recommended to ensure compatibility.
 
